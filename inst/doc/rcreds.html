@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Rick Saporta, Mike Reca" />
+
+<meta name="date" content="2017-10-26" />
+
+<title>Introduction to rcreds</title>
+
+
+
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Introduction to rcreds</h1>
+<h4 class="author"><em>Rick Saporta, Mike Reca</em></h4>
+<h4 class="date"><em>2017-10-26</em></h4>
+
+
+
+<p>Securely Incorporate Login Credentials Into R Scripts</p>
+<p>There are two main functions in <code>rcreds</code> * WRITE functions: <code>write_credentials_to_file()</code> and the database version <code>write_db_credentials_to_file()</code> * READ functions: <code>read_credentials_from_file()</code> and the database version <code>read_db_credentials_from_file()</code></p>
+<p><code>rcreds</code> allows for a secure way to code scripts that require sensitive inputs such as login credentials to databases, APIs, or other systems. Users can securely write their credentials and other sensitive information to an encrypted file on disk, and then later read those credentials back into R.</p>
+<p>The main concept has been adopted from <a href="https://github.com/sdoyen/r_password_crypt/blob/master/crypt.R" class="uri">https://github.com/sdoyen/r_password_crypt/blob/master/crypt.R</a></p>
+<div id="overview" class="section level2">
+<h2>Overview</h2>
+<p>Many scripts require login to other systems. The most common example is accessing data from a database.</p>
+<p>Most comonly, a user will simply hardcode their credentials right into their code. Avoiding this practice generally involves re-inputting passwords over and over again or nesting scripts within other scripts when scheduling tasks.</p>
+<p>We will assume that, by nature of searching out such a package we can avoid here the discussion of the <em>why</em> to implement a different approach (even when <em>“I am the only one who will be using or accessing this”</em>) and simply move on to the <em>how</em> to use.</p>
+</div>
+<div id="note-on-documentation" class="section level2">
+<h2>Note on Documentation:</h2>
+<p>Generally, a user will save their credentials to a folder in <code>~/.rcreds</code> We do not want to include that as the default folder in this vignette, as the vignette examples will write meaningless examples to the users home directory. We will use <code>CREDS_PARENT_FOLDER</code> in place of <code>~/.rcreds</code>.</p>
+</div>
+<div id="usage" class="section level2">
+<h2>Usage</h2>
+<p>Let’s assume you have some function which requires the use of sensitive inputs.</p>
+<p>The <code>rcreds</code> approach would be to write the credentials to an encrypted file on disk and then read and decrypt them when needed.</p>
+</div>
+<div id="initial-setup" class="section level2">
+<h2>Initial Setup</h2>
+<p>The user needs to tell <code>rcreds</code> where files should be written to and read from. This can go in your <code>~/.Rprofile</code> file. Setting the default rcreds folder to ‘/var/folders/hd/7sy3m1d139n062t7x4k58f5c0000gn/T//RtmpnSo8ZZ/credential_files’</p>
+<pre><code>## Warning in set_default_rcreds_folder(file.path(CREDS_PARENT_FOLDER,
+## &quot;db_credential_files&quot;), : Folder '/var/folders/hd/
+## 7sy3m1d139n062t7x4k58f5c0000gn/T//RtmpnSo8ZZ/db_credential_files' does not
+## exist</code></pre>
+<p>Setting the default rcreds db folder to ‘/var/folders/hd/7sy3m1d139n062t7x4k58f5c0000gn/T//RtmpnSo8ZZ/db_credential_files’ Setting the default rcreds key folder to ‘/var/folders/hd/7sy3m1d139n062t7x4k58f5c0000gn/T//RtmpnSo8ZZ/key_files’</p>
+</div>
+<div id="saving-credentials" class="section level2">
+<h2>Saving Credentials</h2>
+<p>One time, write to disk Setting the default rcreds folder to ‘/var/folders/hd/7sy3m1d139n062t7x4k58f5c0000gn/T//RtmpnSo8ZZ/credential_files’</p>
+<pre><code>## Warning in
+## rcreds::set_default_rcreds_folder(file.path(CREDS_PARENT_FOLDER, :
+## Folder '/var/folders/hd/7sy3m1d139n062t7x4k58f5c0000gn/T//RtmpnSo8ZZ/
+## db_credential_files' does not exist</code></pre>
+<p>Setting the default rcreds db folder to ‘/var/folders/hd/7sy3m1d139n062t7x4k58f5c0000gn/T//RtmpnSo8ZZ/db_credential_files’ Setting the default rcreds key folder to ‘/var/folders/hd/7sy3m1d139n062t7x4k58f5c0000gn/T//RtmpnSo8ZZ/key_files’</p>
+<pre><code>## Creating new key with bytes = 32  and  depth = 8.  seed was not set.</code></pre>
+<pre><code>## existing file moved to:  '/var/folders/hd/7sy3m1d139n062t7x4k58f5c0000gn/T//RtmpnSo8ZZ/credential_files/zArchived/for_app123_login.credentials.creds.zarchived_20171026_150414'</code></pre>
+<pre><code>## credentials written to file  &quot;/var/folders/hd/7sy3m1d139n062t7x4k58f5c0000gn/T//RtmpnSo8ZZ/credential_files/for_app123_login.credentials.creds&quot;</code></pre>
+<pre><code>## key file written to &quot;/var/folders/hd/7sy3m1d139n062t7x4k58f5c0000gn/T//RtmpnSo8ZZ/key_files/.crypt_key.rds&quot;</code></pre>
+<p>Then in a script that needs to use the credentials, read from disk and use the list elements. $username [1] “cosmo”</p>
+<p>$password [1] “too many secrets”</p>
+<pre><code>## some_login_function() received username = 'cosmo' and password = 'too many secrets' and separate_param = 'plain example'
+##    (obviously wouldn't normally output like this)</code></pre>
+<p>[1] TRUE</p>
+<pre><code>## some_login_function() received username = 'cosmo' and password = 'too many secrets' and separate_param = 'do.call example'
+##    (obviously wouldn't normally output like this)</code></pre>
+<p>[1] TRUE</p>
+</div>
+<div id="troubleshooting" class="section level2">
+<h2>Troubleshooting</h2>
+<p>Since we are writing to and reading from files, the user under which <code>R</code> is running must have appropriate permissions to both: the file, and the folder in which the file is located.</p>
+<p>When this is not the case you will receive an error that will (usually) end with <code>probable reason 'Permission denied'</code> For example:</p>
+<pre><code>Error in gzfile(file, mode) : cannot open the connection
+In addition: Warning message:
+In gzfile(file, mode) :
+  cannot open compressed file '/PATH/TO/FILE/file_name.crypt_key.rds', probable reason 'Permission denied'</code></pre>
+<p>NOTE: You will often see this when you create the key or creds file with one user and then try to use the file with a different user. eg, did you use <code>sudo R</code> to create the files?</p>
+<p>RESOLUTION: Please ensure that your user has permissions on the folder and file. (On Mac OSX and Linux systems, use <code>chown</code> and/or <code>chmod</code>). <a href="www.stackoverflow.com">Stackoverflow</a> has several questions and answers on this topic.</p>
+</div>
+<div id="issues-feedback" class="section level2">
+<h2>Issues &amp; Feedback</h2>
+<p>Please report any issues or bugs at <a href="https://github.com/rsaporta/rcreds/issues">the package’s github page</a></p>
+<p>All pull requests will be gladly considered.</p>
+<p><em>For tips on pull requests, checkout <a href="http://codeinthehole.com/tips/pull-requests-and-other-good-practices-for-teams-using-github/">this helpful blog post</a> by codeinthehole</em></p>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
